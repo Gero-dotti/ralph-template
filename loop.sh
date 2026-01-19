@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Ralph Playbook - Autonomous Loop Script
 # Usage: ./loop.sh [plan|build] [--max-iterations N] [--push]
@@ -59,9 +59,8 @@ if [[ ! -f "$PROMPT_FILE" ]]; then
     exit 1
 fi
 
-MODE_UPPER=$(echo "$MODE" | tr '[:lower:]' '[:upper:]')
 echo "============================================"
-echo " Ralph Playbook - ${MODE_UPPER} Mode"
+echo " Ralph Playbook - ${MODE^^} Mode"
 echo "============================================"
 echo ""
 echo "Starting autonomous loop..."
@@ -92,14 +91,6 @@ while true; do
         echo "Claude exited with code $EXIT_CODE"
         echo "Continuing to next iteration..."
         sleep 2
-    fi
-
-    # Check for completion signal                                                                                                       
-    if [[ -f ".ralph-complete" ]]; then                                                                                                 
-        echo ""                                                                                                                         
-        echo "✓ All tasks complete!"                                                                                                    
-        rm .ralph-complete                                                                                                              
-        exit 0                                                                                                                          
     fi
 
     # Push if requested
